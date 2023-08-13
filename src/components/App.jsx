@@ -7,9 +7,13 @@
 // import { useEffect, useState } from "react";
 // import { getAllContacts } from "redux/thunk";
 
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "./Layout";
+import { selectToken } from "redux/selectors";
+import { useGetCurrentUserQuery } from "redux/auth/authApi";
+import { defUser, setUserSlice } from "redux/userSlice";
 
 const Home = lazy(() => import("pages/Home"));
 const Login = lazy(() => import("pages/Login"));
@@ -44,6 +48,29 @@ export default function App() {
   //     </Section>
   //   </>)
 
+  const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+  
+  const { data, isError, isSuccess } = useGetCurrentUserQuery(token, {
+    skip: !token,
+  } );
+  
+  useEffect(() => {
+    if (isSuccess) {
+      
+      const newData = {
+        user: data,
+        token,
+        registered: true,
+      }
+      dispatch(setUserSlice(newData));
+    }
+
+    if (isError) {
+      dispatch(setUserSlice(defUser));
+      alert('Token invalid');
+    }
+  }, [data, dispatch, isSuccess, isError, token]);
 
   return (
     <Routes>

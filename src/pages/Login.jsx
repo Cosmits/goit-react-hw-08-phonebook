@@ -1,4 +1,4 @@
-import LoginForm from 'components/LoginForm/LoginForm';
+import LoginForm from 'components/_Forms/LoginForm';
 import Section from 'components/Section'
 import React from 'react'
 

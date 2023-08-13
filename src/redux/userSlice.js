@@ -1,11 +1,17 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
+export const defUser = {
+  user: null,
+  token: null,
+  registered: false,
+};
+
 const userSlice = createSlice({
   name: 'user',
-  initialState: '',
+  initialState: defUser,
   reducers: {
     setUserSlice(state, action) {
-      return (state = action.payload);
+      return (state  = action.payload);
     },
   },
 });

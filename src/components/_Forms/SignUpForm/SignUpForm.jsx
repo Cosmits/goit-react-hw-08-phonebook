@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { FiUser, FiMail, FiLock, FiLogIn } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useSignUpMutation } from "redux/auth/authApi";
-import { setUserSlice } from "redux/userSlice";
+import { defUser, setUserSlice } from "redux/userSlice";
 
 
 const SignUpForm = () => {
@@ -24,7 +24,7 @@ const SignUpForm = () => {
 
     try {
       const newUser = {
-        fullName: form.elements.fullName.value,
+        name: form.elements.fullName.value,
         email: form.elements.email.value,
         password: form.elements.password1.value,
       }
@@ -39,11 +39,16 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setUserSlice(data));
+      const newData = {
+        user: data.user,
+        token: data.token,
+        registered: true,
+      }
+      dispatch(setUserSlice(newData));
     }
 
     if (isError) {
-      dispatch(setUserSlice(''));
+      dispatch(setUserSlice(defUser));
       alert('This email was registered');
     }
   }, [data, dispatch, isSuccess, isError]);

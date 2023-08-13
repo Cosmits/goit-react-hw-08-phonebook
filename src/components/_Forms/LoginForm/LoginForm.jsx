@@ -1,9 +1,19 @@
-import { Button, FormControl, Icon, Input, InputGroup, InputLeftElement, InputRightElement, Stack } from "@chakra-ui/react"
+import {
+  Button,
+  FormControl,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  Stack
+} from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { FiMail, FiLock, FiLogIn } from "react-icons/fi";
 import { useDispatch } from "react-redux";
+import { defUser, setUserSlice } from "redux/userSlice";
+
 import { useLoginMutation } from "redux/auth/authApi";
-import { setUserSlice } from "redux/userSlice";
 
 
 const LoginForm = () => {
@@ -13,7 +23,8 @@ const LoginForm = () => {
 
   const [loginForm, { data, isSuccess, isError }] = useLoginMutation();
   const dispatch = useDispatch();
-
+  
+     
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -34,11 +45,16 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isSuccess) { 
-      dispatch(setUserSlice(data));
+      const newData = {
+        user: data.user,
+        token: data.token,
+        registered: true,
+      } 
+      dispatch(setUserSlice(newData));
     }
 
     if (isError) {
-      dispatch(setUserSlice(''));
+      dispatch(setUserSlice(defUser));
       alert('Please enter a valid email or password');
     }
   }, [data, dispatch, isSuccess, isError]);
