@@ -1,12 +1,18 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import Section from 'components/Section'
-import React from 'react'
 
 const Home = () => {
   return (
-    <Section title="Home PhoneBook">
+    <Section title="PhoneBook">
       <Box mt={'12px'}>
-        <Text >Home</Text>
+        <Text ml={8}>In PhoneBook  application used:</Text>
+        <UnorderedList ml={'12px'}>
+          <ListItem ml={'52px'}>React, React router</ListItem>
+          <ListItem ml={'52px'}>Redux, Redux Toolkit, RTK Query</ListItem>
+          <ListItem ml={'52px'}>Redux Persist</ListItem>
+          <ListItem ml={'52px'}>Chakra UI</ListItem>
+          <ListItem ml={'52px'}>React-toastify</ListItem>
+        </UnorderedList>
       </Box>
     </Section>
   )

@@ -4,6 +4,8 @@ import { FiUser, FiMail, FiLock, FiLogIn } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useSignUpMutation } from "redux/rtkAPI/authApi";
 import { defUser, setUserSlice } from "redux/userSlice";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const SignUpForm = () => {
@@ -20,7 +22,7 @@ const SignUpForm = () => {
     const password1 = form.elements.password1.value;
     const password2 = form.elements.password2.value;
 
-    if (password1 !== password2) return alert('Please retype a password');
+    if (password1 !== password2) return toast.error('Please retype a password');
 
     try {
       const newUser = {
@@ -49,7 +51,7 @@ const SignUpForm = () => {
 
     if (isError) {
       dispatch(setUserSlice(defUser));
-      alert('This email was registered');
+      toast.error('This email was registered');
     }
   }, [data, dispatch, isSuccess, isError]);
 

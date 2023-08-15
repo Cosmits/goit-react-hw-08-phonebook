@@ -11,26 +11,22 @@ import { selectToken } from 'redux/selectors';
 import { useEffect } from 'react';
 import { Box, Button, Icon, useDisclosure } from '@chakra-ui/react';
 import { FiTrash2, FiEdit } from "react-icons/fi";
-import ModalWindow from 'components/ModalWindow/ModalWindow';
-import ContactForm from 'components/_Forms/ContactForm/ContactForm';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+import ModalWindow from 'components/ModalWindow';
+import ContactForm from 'components/_Forms/ContactForm';
 
 const ContactsItem = ({ id, name, number }) => {
   
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const token = useSelector(selectToken);
   
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
   const [deleteContact, { data, error, isError }] = useDelContactMutation();
-  // const [editContact, { data: EditData, error: EditError, isError: EditIsError }] = useEditContactMutation();
-
-  const handleEditContact = (editUser) => {
-    // setSelectedContact(contact);
-    // editContact({ token, editUser })
-    onOpen();
-  };
 
   useEffect(() => {
-    if (isError) alert(error);
+    if (isError) toast.error(error);
     if (data) console.log(" data:", data)
   }, [data, error, isError])
 
@@ -40,8 +36,8 @@ const ContactsItem = ({ id, name, number }) => {
         {name}:<ContactNumber>{number}</ContactNumber>
       </ContactName>
       <Box>
-        <Button onClick={() => handleEditContact({ id, name, number })} mr={'8px'} > <Icon as={FiEdit} /></Button>
-        <Button onClick={() => deleteContact({ token, id })}> <Icon as={FiTrash2} /></Button>
+        <Button onClick={() => onOpen()} mr={'8px'} mt={'2px'} mb={'2px'} > <Icon as={FiEdit} /></Button>
+        <Button onClick={() => deleteContact({ token, id })} mr={'2px'} mt={'2px'} mb={'2px'}> <Icon as={FiTrash2} /></Button>
       </Box>
 
       <ModalWindow isOpen={isOpen} onClose={onClose} title={'Edit contact'}>

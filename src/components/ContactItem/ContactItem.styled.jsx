@@ -5,7 +5,7 @@ export const ContactItem = styled.li`
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
-  border: 2px solid white;
+  border: 2px solid;
 
    /* & button:hover {
     background-color: greenyellow;

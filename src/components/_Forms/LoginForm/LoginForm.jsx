@@ -11,8 +11,10 @@ import {
 import { useEffect, useState } from "react"
 import { FiMail, FiLock, FiLogIn } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { defUser, setUserSlice } from "redux/userSlice";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
+import { defUser, setUserSlice } from "redux/userSlice";
 import { useLoginMutation } from "redux/rtkAPI/authApi";
 
 
@@ -55,7 +57,7 @@ const LoginForm = () => {
 
     if (isError) {
       dispatch(setUserSlice(defUser));
-      alert('Please enter a valid email or password');
+      toast.error('Please enter a valid email or password');
     }
   }, [data, dispatch, isSuccess, isError]);
 

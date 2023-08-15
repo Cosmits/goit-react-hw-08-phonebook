@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
-// import { Button, Form, Label, InputForm } from './ContactForm.styled';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-import { selectContacts, selectToken } from 'redux/selectors';
+
 import { Button, FormControl, Icon, Input, InputGroup, InputLeftElement, Stack } from '@chakra-ui/react';
 import { FiUser, FiPhone, FiUserPlus } from "react-icons/fi";
 import { useAddContactMutation, useEditContactMutation } from 'redux/rtkAPI/contactsApi';
-// import { addContactSlice } from 'redux/contactsSlice';
-
+import { selectContacts, selectToken } from 'redux/selectors';
 export default function ContactForm({ onClose, editContact }) {
 
   const [name, setName] = useState('');
@@ -33,8 +32,6 @@ export default function ContactForm({ onClose, editContact }) {
       setNumber(editContact.number);
       setID(editContact.id);
     }
-
-
   }, [editContact]);
 
   //================================================================
@@ -66,7 +63,7 @@ export default function ContactForm({ onClose, editContact }) {
         || contact.number.toLowerCase().trim() === number.toLowerCase().trim());
 
       if (filterTrue) {
-        alert(`${name}: ${number} is duplicate contact or number`)
+        toast.warn(`${name}: ${number} is duplicate contact or number`)
       } else {
         addContactRequest({ token, newUser: { name, number } })
         formReset();

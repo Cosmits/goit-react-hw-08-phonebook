@@ -1,18 +1,24 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { List } from './ContactsList.styled';
 import ContactsItem from 'components/ContactItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetAllContactsQuery } from 'redux/rtkAPI/contactsApi';
-import { selectToken } from 'redux/selectors';
+import { selectToken, selectVisibleContacts } from 'redux/selectors';
 import Loader from 'components/Loader';
 import { useEffect } from 'react';
 import { setContactSlice } from 'redux/contactsSlice';
 
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ContactsList = () => {
 
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const filteredContacts = useSelector(selectVisibleContacts)
+  
+  const dispatch = useDispatch();
+  
   const { data: contacts, isSuccess, isFetching, isError } = useGetAllContactsQuery(token, {
     skip: !token,
   });
@@ -24,7 +30,7 @@ const ContactsList = () => {
 
     if (isError) {
       // dispatch(setUserSlice(defUser));
-      alert('Please enter a valid email or password');
+      toast.warn('Please enter a valid email or password');
     }
   }, [contacts, dispatch, isError, isSuccess]);
 
@@ -32,7 +38,8 @@ const ContactsList = () => {
     <Box>
       {isFetching && <Loader />}
       <List>
-        {contacts && contacts.map(({ name, number, id }) => (
+        {filteredContacts.length === 0 && <Text>There are no contacts found!</Text>}
+        {filteredContacts && filteredContacts.map(({ name, number, id }) => (
           <ContactsItem
             key={id}
             id={id}
