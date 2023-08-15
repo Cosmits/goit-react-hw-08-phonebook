@@ -13,7 +13,7 @@ import { FiMail, FiLock, FiLogIn } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { defUser, setUserSlice } from "redux/userSlice";
 
-import { useLoginMutation } from "redux/auth/authApi";
+import { useLoginMutation } from "redux/rtkAPI/authApi";
 
 
 const LoginForm = () => {
@@ -23,8 +23,8 @@ const LoginForm = () => {
 
   const [loginForm, { data, isSuccess, isError }] = useLoginMutation();
   const dispatch = useDispatch();
-  
-     
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -35,7 +35,7 @@ const LoginForm = () => {
         password: form.elements.password.value,
       }
       await loginForm(logIn);
-            
+
       // if (isSuccess) form.reset();
     } catch (error) {
       console.error(error);
@@ -44,12 +44,12 @@ const LoginForm = () => {
   }
 
   useEffect(() => {
-    if (isSuccess) { 
+    if (isSuccess) {
       const newData = {
         user: data.user,
         token: data.token,
         registered: true,
-      } 
+      }
       dispatch(setUserSlice(newData));
     }
 

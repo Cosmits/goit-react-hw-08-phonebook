@@ -1,12 +1,19 @@
-// import { useSelector } from 'react-redux';
-// import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { selectRegistered } from 'redux/selectors';
 
-// import { selectAuthentificated } from 'redux/authReducer';
 
-// const PrivateRoute = ({ children, redirectTo = '/' }) => {
-//   const authentificated = useSelector(selectAuthentificated);
+const PrivateRoute = ({ children, redirectTo = '/' }) => {
+  const registered = useSelector(selectRegistered);
 
-//   return authentificated ? children : <Navigate to={redirectTo} />;
-// };
+  return registered ? children : <Navigate to={redirectTo} />;
+};
 
-// export default PrivateRoute;
+
+PrivateRoute.propTypes = {
+  children: PropTypes.any,
+  redirectTo: PropTypes.string,
+};
+
+export default PrivateRoute;

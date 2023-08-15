@@ -2,7 +2,7 @@ import { Button, FormControl, Icon, Input, InputGroup, InputLeftElement, InputRi
 import { useEffect, useState } from "react"
 import { FiUser, FiMail, FiLock, FiLogIn } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { useSignUpMutation } from "redux/auth/authApi";
+import { useSignUpMutation } from "redux/rtkAPI/authApi";
 import { defUser, setUserSlice } from "redux/userSlice";
 
 

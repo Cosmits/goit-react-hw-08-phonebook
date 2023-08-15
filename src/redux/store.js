@@ -16,7 +16,9 @@ import { userReducer } from './userSlice';
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
 
-import { authApi } from './auth/authApi';
+import { authApi } from './rtkAPI/authApi';
+import { contactsApi } from './rtkAPI/contactsApi';
+
 
 const userConfig = {
   key: 'user',
@@ -30,12 +32,15 @@ export const store = configureStore({
     contacts: contactsReducer,
     filter: filterReducer,
     [authApi.reducerPath]: authApi.reducer,
+    [contactsApi.reducerPath]: contactsApi.reducer,
   },
   middleware: getDefaultMiddleware => [...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }), authApi.middleware,
+  }),
+  authApi.middleware,
+  contactsApi.middleware,
   ],
   // devTools: process.env.NODE_ENV === 'development',
 });

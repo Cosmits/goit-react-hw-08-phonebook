@@ -12,8 +12,9 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "./Layout";
 import { selectToken } from "redux/selectors";
-import { useGetCurrentUserQuery } from "redux/auth/authApi";
+import { useGetCurrentUserQuery } from "redux/rtkAPI/authApi";
 import { defUser, setUserSlice } from "redux/userSlice";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const Home = lazy(() => import("pages/Home"));
 const Login = lazy(() => import("pages/Login"));
@@ -50,14 +51,14 @@ export default function App() {
 
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
-  
+
   const { data, isError, isSuccess } = useGetCurrentUserQuery(token, {
     skip: !token,
-  } );
-  
+  });
+
   useEffect(() => {
     if (isSuccess) {
-      
+
       const newData = {
         user: data,
         token,
@@ -78,7 +79,10 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/contacts" element={<Contacts />} />
+        <Route path='/contacts' element={
+          <PrivateRoute redirectTo='/login'>
+            <Contacts />
+          </PrivateRoute>} />
         <Route path="*" element={<Home />} />
       </Route>
     </Routes>

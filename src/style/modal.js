@@ -6,7 +6,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const sunset = definePartsStyle({
   dialog: {
-    bg: 'linear-gradient(90deg, #2A6571 0%, #C15553 100%)',
+    // bg: 'linear-gradient(90deg, #2A6571 0%, #C15553 100%)',
   },
 });
 

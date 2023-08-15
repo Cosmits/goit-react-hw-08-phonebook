@@ -2,7 +2,7 @@ import { Avatar, Button, Icon, Stack, Text } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken, selectUser } from "redux/selectors";
 import { FiLogOut } from "react-icons/fi";
-import { useLogoutMutation } from "redux/auth/authApi";
+import { useLogoutMutation } from "redux/rtkAPI/authApi";
 import { useEffect } from "react";
 import { defUser, setUserSlice } from "redux/userSlice";
 

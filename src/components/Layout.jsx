@@ -18,17 +18,19 @@ const Layout = () => {
   return (
     <Box>
       {/* header */}
-      <Stack as='header' position={'relative'} direction={['column', 'column', 'row', 'row']}
+      <Stack
+        as={'header'}
+        direction={['column', 'column', 'row', 'row']}
+        alignItems={'center'}
         justifyContent={'space-between'}
         padding={'24px 32px'}>
 
-        <Flex direction={['column', 'column', 'row', 'row']} gap={['12px', '12px', '32px', '32px']}>
-          <Box><Link as={NavLink} to="/">Home</Link></Box>
-          <Box><Link as={NavLink} to="/contacts">Contacts</Link></Box>
-          {registered ? <UserMenu /> : <NoAuthMenu />}
-  
+        <Flex direction={['column', 'column', 'row', 'row']} gap={['12px', '12px', '32px', '32px']} justifyContent={'space-between'}>
+          <Center><Link as={NavLink} to="/">Home</Link></Center>
+          {registered && <Center><Link as={NavLink} to="/contacts">Contacts</Link></Center>}
         </Flex>
-      </Stack>
+        {registered ? <UserMenu /> : <NoAuthMenu />}
+      </ Stack>
 
       {/* main */}
       <Center>

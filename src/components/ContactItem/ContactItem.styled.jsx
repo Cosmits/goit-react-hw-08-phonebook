@@ -7,9 +7,9 @@ export const ContactItem = styled.li`
   border-radius: 5px;
   border: 2px solid white;
 
-   & button:hover {
+   /* & button:hover {
     background-color: greenyellow;
-  }
+  } */
 
   & + li {
     margin-top: 12px;
@@ -27,11 +27,11 @@ export const ContactNumber = styled.span`
   margin-left: 10px;
 `;
 
-export const Button = styled.button`
-  cursor: pointer;
-  background-color: white;
-  border-radius: 5px;
-  border: 2px solid lightgray;
-  padding: 10px;
-  transition: background-color 250ms linear;
-`;
+// export const Button = styled.button`
+//   cursor: pointer;
+//   background-color: white;
+//   border-radius: 5px;
+//   border: 2px solid lightgray;
+//   padding: 10px;
+//   transition: background-color 250ms linear;
+// `;
