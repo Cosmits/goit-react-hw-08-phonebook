@@ -1,4 +1,8 @@
-import { extendTheme } from '@chakra-ui/react'; 
+import {
+  extendTheme,
+  withDefaultColorScheme,
+  theme as baseTheme,
+} from '@chakra-ui/react'; 
 
 const breakpoints = {
   sm: '30em', // 480px
@@ -38,6 +42,9 @@ const styles = {
 }
 
 export const theme = extendTheme({
+  colors: {
+    brand: baseTheme.colors.telegram,
+  },
   fonts: {
     heading: `'Rubik Variable', sans - serif`,
     body: `'Rubik Variable', sans - serif`,
@@ -45,4 +52,6 @@ export const theme = extendTheme({
   breakpoints,
   styles,
   config,
-})
+  
+},
+  withDefaultColorScheme({ colorScheme: 'brand' }),)

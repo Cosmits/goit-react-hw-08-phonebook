@@ -35,7 +35,7 @@ const Layout = () => {
             <Switch
               isChecked={colorMode === 'dark'}
               onChange={toggleColorMode}
-              colorScheme="teal"
+              // colorScheme="teal"
             />
             <Icon as={FaMoon} />
           </HStack>

@@ -12,7 +12,7 @@ const Section = ({ title, children }) => {
       paddingTop={'40px'}
       paddingBottom={'40px'}
       sx={{
-        backgroundColor:  'hsla(0, 0%, 10%, 0.5)',
+        backgroundColor:  'hsla(0, 0%, 10%, 0.35)',
         backdropFilter: 'blur(8px)',
         border: '2px solid',
         borderRadius: '1rem',
