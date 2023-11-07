@@ -1,4 +1,4 @@
-import { Box, Center, Flex, HStack, Icon, Link, Stack, Switch, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Center, Flex, HStack, Icon, Image, Link, Stack, Switch, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Loader from "components/Loader";
 import { Suspense } from "react";
 import { useSelector } from "react-redux";
@@ -11,11 +11,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import UserMenu from "./_Menu/UserMenu";
 import NoAuthMenu from "./_Menu/NoAuthMenu";
+import bgImage from '../images/bgImage.jpg';
 
 const Layout = () => {
 
   const registered = useSelector(selectRegistered);
-  const chakraTheme = useColorModeValue('light','dark')
+  const chakraTheme = useColorModeValue('light', 'dark')
+
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -29,13 +31,13 @@ const Layout = () => {
         padding={'24px 32px'}>
 
         <Flex direction={['column', 'row', 'row', 'row']} gap={['12px', '12px', '32px', '32px']} justifyContent={'space-between'}>
-          
+
           <HStack>
             <Icon as={FaSun} />
             <Switch
               isChecked={colorMode === 'dark'}
               onChange={toggleColorMode}
-              // colorScheme="teal"
+            // colorScheme="teal"
             />
             <Icon as={FaMoon} />
           </HStack>
@@ -47,6 +49,11 @@ const Layout = () => {
 
       {/* main */}
       <Center>
+        <Image opacity={chakraTheme === 'light' ? '50%' : '40%'}
+          width={'100%'} height={'100vh'}
+          src={bgImage}
+          objectFit={'cover'}
+          objectPosition={'center'} />
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
